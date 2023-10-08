@@ -1,98 +1,85 @@
-// Assignment Code
 
-// prompt user for password length (8 - 128 characters)
+// prompt user for parameters and save in variables
 
-var pwLength = prompt("enter password length at least 8 characters long", "");
+var length = prompt("enter password length at least 8 characters long");
 
-// confirm if user wants uppercase or lowercase
+var upperCase = confirm("Does your password require uppercase letters?");
 
-  var upperCase = confirm("Does your password require uppercase letters?");
-
-  var lowerCase = confirm("Does your password require lowercase letters?");
-
-// confirm if user wants numeric password
+var lowerCase = confirm("Does your password require lowercase letters?");
   
-  var numbers = confirm("Does your password require numbers?");
+var numbers = confirm("Does your password require numbers?");
 
-// confirm if user wants special characters
+var symbols = confirm("Does your password require special characters?");
 
-  var specialChars = confirm("Does your password require special characters?");
+// console.log(length);
+
+// saves button w/ID=generate into variable
 
 var generateBtn = document.querySelector("#generate");
 
-pwResult = "";
 
-// Write password to the #password input
-function generatePassword(pwLength, upperCase, lowerCase, numbers, specialChars){
+// var length, upperCase, lowerCase, numbers, symbols
 
-  for (var i = 0 ; i < pwLength; ++i) {
-    retVal += charset.charAt(Math.floor(Math.random() * charset.length));
+// generate password function:
+
+function generatePassword(){
+
+// initialize charset variable
+
+  let charSet = '';
+
+// if statements returning boolean value, which either adds a new charSet or not. 
+
+  if (upperCase){
+    charSet += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  } 
+
+  if (lowerCase){
+    charSet += 'abcdefghijklmnopqrstuvwxyz'
+  } 
+
+  if (numbers){
+    charSet += '0123456789'
+  } 
+
+  if (symbols){
+    charSet += '!@#$%^&*?'
+  } 
+
+// initialize password array 
+
+  let pwArray = [];
+
+// while the array length is less than the user input length, loop will process new characters to add to the empty character set. 
+
+  while (pwArray.length < length){
+
+    const char = charSet[Math.floor(math.random() * charset.length)];
+
+    if (!noDups || !pwArray.includes(char)) {
+      pwArray.push(char)
+    }
+
   }
-}
 
+  // return the password: 
+
+  return pwArray.join('');
+
+}
 
 function writePassword() {
 
-  // var password = generatePassword(pwLength, upperCase, lowerCase, numbers, specialChars){
+// reference all input variables
 
-  // }
+// generate a random password 
+
+var password = generatePassword();
+
 
   var passwordText = document.querySelector("#password");
 
-
-
-  var charSet = "";
-
-  if (upperCase){
-
-    charSet.push(["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"])
-
-  } 
-  
-  if (lowerCase){
-
-    charSet.push(["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"])
-
-  }
-
-// Math.floor(math.random() * length of some kind)
-
-// process...(4 confirmExpressionConditionals)
-
-function confirmExpressionConditions(){
-
-  if (upperCase){
-    // something
-    } else {
-    // something else
-    }
-    
-    if (lowerCase){
-      // something
-    } else {
-      // something else
-    }
-    
-    if (numbers){
-      // something
-    } else {
-      // something else
-    }
-    
-    if (specialChars){
-      // something
-    } else {
-      // something else
-    }
-
-}
-
-
-
-// return password
-
-
-// renders the password in the body:
+// render password on page.
 
   passwordText.value = password;
 
@@ -100,3 +87,4 @@ function confirmExpressionConditions(){
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
