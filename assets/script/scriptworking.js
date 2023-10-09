@@ -1,6 +1,8 @@
 
 // prompt user for parameters and save in variables
 
+// form in html or save variables though prompt/conrim methods.  either way, it's global variables.
+
 var length = prompt("enter password length at least 8 characters long");
 
 var upperCase = confirm("Does your password require uppercase letters?");
@@ -15,18 +17,18 @@ var symbols = confirm("Does your password require special characters?");
 
 var generateBtn = document.querySelector("#generate");
 
-
-// var length, upperCase, lowerCase, numbers, symbols
-
 // generate password function:
+
 
 function generatePassword(){
 
 // initialize charset variable
 
-  let charSet = '';
+  var charSet = '';
 
-// if statements returning boolean value, which either adds a new charSet or not. 
+// if statements returning boolean value, which either adds a new charSet or not.
+
+// generate a random password 
 
   if (upperCase){
     charSet += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -50,13 +52,15 @@ function generatePassword(){
 
 // while the array length is less than the user input length, loop will process new characters to add to the empty character set. 
 
-  while (pwArray.length <= length){
+  while (pwArray.length < length){
 
-    const char = charSet[Math.floor(math.random() * charset.length)];
+    const char = charSet[Math.floor(Math.random() * charSet.length)];
 
     pwArray.push(char)
 
   }
+
+
 
   // return the password: 
 
@@ -64,13 +68,13 @@ function generatePassword(){
 
 }
 
+
+
+
 function writePassword() {
 
-// reference all input variables
-
-// generate a random password 
-
 var password = generatePassword();
+
 
 
   var passwordText = document.querySelector("#password");
