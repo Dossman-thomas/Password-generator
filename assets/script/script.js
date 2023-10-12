@@ -7,6 +7,17 @@ var generateBtn = document.querySelector("#generate");
 
 generateBtn.addEventListener("click", writePassword);
 
+//initialize variables: 
+var pwArray = [];
+var upperCase;
+var lowerCase;
+var numbers;
+var symbols;
+var charUpperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var charLowerCase = 'abcdefghijklmnopqrstuvwxyz';
+var charNumbers = '0123456789';
+var charSymbols = '!@#$%^&*?';
+
 // generate password function:
 
 function generatePassword(){
@@ -25,7 +36,7 @@ if (pwLength < pwMin || pwLength > pwMax) {
 
   alert("Password length must be between 8 and 128 characters long.");
 
-  console.log(pwLength);
+  // console.log(pwLength);
 
   return generatePassword();
 }
@@ -34,17 +45,15 @@ if (isNaN(pwLength)){
 return;
 }
 
-
-
 // prompt user for parameters and save in variables:
 
-  var upperCase = confirm("Does your password require uppercase letters?");
+  upperCase = confirm("Does your password require uppercase letters?");
 
-  var lowerCase = confirm("Does your password require lowercase letters?");
+  lowerCase = confirm("Does your password require lowercase letters?");
     
-  var numbers = confirm("Does your password require numbers?");
+  numbers = confirm("Does your password require numbers?");
 
-  var symbols = confirm("Does your password require special characters?");
+  symbols = confirm("Does your password require special characters?");
 
 
 // initialize charset variable:
@@ -54,37 +63,38 @@ return;
 // if statements returning boolean value, which either adds a new charSet or not.
 
   if (upperCase){
-    charSet += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    charSet += charUpperCase;
   } 
 
   if (lowerCase){
-    charSet += 'abcdefghijklmnopqrstuvwxyz';
+    charSet += charLowerCase;
   } 
 
   if (numbers){
-    charSet += '0123456789';
+    charSet += charNumbers;
   } 
 
   if (symbols){
-    charSet += '!@#$%^&*?';
+    charSet += charSymbols;
   }
-  
 
   if (!upperCase && !lowerCase && !numbers && !symbols){
     alert("Inadequate parameters set. Please try again.");
   }
   
-  let finalPassword = checkCharacters(charSet, pwLength);
+  let finalPassword = givePassword(charSet, pwLength);
+
   // return the password: 
 
   return finalPassword.join('');
 
 }
 
-function checkCharacters (charSet, pwLength){
+function givePassword (charSet, pwLength){
+  
   // initialize password array 
 
-  let pwArray = [];
+  pwArray = [];
 
 // while the array length is less than the user input length, loop will process new characters to add to the empty character set. 
 
@@ -93,15 +103,42 @@ function checkCharacters (charSet, pwLength){
     const char = charSet[Math.floor(Math.random() * charSet.length)];
 
     pwArray.push(char);
-
   }
-  
-  // check if parameter is included depending on true booleans from if statements 
-  // call function checkCharacters until true
-  // return pwArray >
 
-  return pwArray;
-}
+  if (upperCase){
+    pwArray[0] = charUpperCase[Math.floor(Math.random() * charUpperCase.length)];
+  }
+
+  if (lowerCase){
+    pwArray[2] = charLowerCase[Math.floor(Math.random() * charLowerCase.length)];
+  }
+
+  if (numbers){
+    pwArray[4] = charNumbers[Math.floor(Math.random() * charNumbers.length)];
+  }
+
+  if (symbols){
+    pwArray[6] = charSymbols[Math.floor(Math.random() * charSymbols.length)];
+  }
+  // return pwArray
+
+    return pwArray;
+  }
+
+
+// function checkCharacters (charSet, pwLength){
+  
+//   // check if parameter is included depending on true booleans from if statements 
+//   // call function checkCharacters until true
+//   console.log(pwArray);
+//   console.log(!pwArray.includes(charUpperCase));
+
+//   if (!pwArray.includes(charUpperCase) || !pwArray.includes(charLowerCase) || !pwArray.includes(charNumbers) || !pwArray.includes(charSymbols)){
+//     console.log("hi");
+//     givePassword (charSet, pwLength);
+//   }
+
+// }
 
 
 function writePassword() {
